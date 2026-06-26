@@ -59,6 +59,10 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Speech
         {
             if (_webSocket?.State != WebSocketState.Open) return;
 
+            if (fromLanguage.ToLower().Equals("zh-cn"))
+            {
+                toLanguage = "en";
+            }
             var startMessage = new
             {
                 type = "START",
