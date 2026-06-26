@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Shiliu.Oral.Sdk.Abstractions.Auth;
 using Shiliu.Oral.Sdk.Abstractions.Models;
 
 namespace Shiliu.Oral.Sdk.Infrastructure.Http
@@ -18,12 +19,14 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Http
         protected readonly IHttpClientFactory HttpClientFactory;
         protected readonly string ClientName;
         protected readonly ILogger Logger;
+        protected readonly ICurrentLanguageProvider CurrentLanguageProvider;
 
-        protected HttpApiClientBase(IHttpClientFactory httpClientFactory, string clientName, ILogger logger)
+        protected HttpApiClientBase(IHttpClientFactory httpClientFactory, string clientName, ILogger logger, ICurrentLanguageProvider currentLanguageProvider = null)
         {
             HttpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
             ClientName = clientName ?? throw new ArgumentNullException(nameof(clientName));
             Logger = logger;
+            CurrentLanguageProvider = currentLanguageProvider;
         }
 
         /// <summary>Perform a GET request.</summary>
@@ -34,7 +37,8 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Http
 
             Logger?.LogDebug("GET {Url}", url);
 
-            var response = await client.GetAsync(url, ct);
+            var request = await CreateRequestMessageAsync(HttpMethod.Get, url, ct);
+            var response = await client.SendAsync(request, ct);
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadAsStringAsync();
             Logger?.LogDebug("GET {Url} OK", url);
@@ -49,12 +53,29 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Http
 
             Logger?.LogDebug("POST {Url}", url);
 
-            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(url, content, ct);
+            var request = await CreateRequestMessageAsync(HttpMethod.Post, url, ct);
+            request.Content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var response = await client.SendAsync(request, ct);
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadAsStringAsync();
             Logger?.LogDebug("POST {Url} OK", url);
             return data;
+        }
+
+        private async Task<HttpRequestMessage> CreateRequestMessageAsync(HttpMethod method, string url, CancellationToken ct)
+        {
+            var request = new HttpRequestMessage(method, url);
+
+            if (CurrentLanguageProvider != null)
+            {
+                var language = await CurrentLanguageProvider.GetCurrentLanguageAsync(ct);
+                if (!string.IsNullOrWhiteSpace(language))
+                {
+                    request.Headers.TryAddWithoutValidation("language", language);
+                }
+            }
+
+            return request;
         }
 
         /// <summary>Parse an AiTalk-style API response.</summary>

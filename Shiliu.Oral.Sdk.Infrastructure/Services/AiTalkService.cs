@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Shiliu.Oral.Sdk.Abstractions.Auth;
 using Shiliu.Oral.Sdk.Abstractions.Exceptions;
 using Shiliu.Oral.Sdk.Abstractions.Enums;
 using Shiliu.Oral.Sdk.Abstractions.Models;
@@ -20,8 +21,8 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Services
     /// </summary>
     public class AiTalkService : HttpApiClientBase, IAiTalkService
     {
-        public AiTalkService(IHttpClientFactory httpClientFactory, ILogger<AiTalkService> logger)
-            : base(httpClientFactory, "AiTalkClient", logger)
+        public AiTalkService(IHttpClientFactory httpClientFactory, ILogger<AiTalkService> logger, ICurrentLanguageProvider currentLanguageProvider = null)
+            : base(httpClientFactory, "AiTalkClient", logger, currentLanguageProvider)
         {
         }
 
