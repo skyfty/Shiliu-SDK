@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Shiliu.Oral.Sdk</name>
+    </assembly>
+    <members>
+        <member name="T:Shiliu.Oral.Sdk.ShiliuOralClient">
+            <summary>
+            Unified facade for the Shiliu Oral English SDK.
+            Aggregates all core services through a single entry point.
+            </summary>
+        </member>
+        <member name="T:Shiliu.Oral.Sdk.ShiliuOralOptions">
+            <summary>
+            Configuration options for the Shiliu Oral English SDK.
+            </summary>
+        </member>
+        <member name="P:Shiliu.Oral.Sdk.ShiliuOralOptions.AiTalkBaseUrl">
+            <summary>Base URL for the AI Talk API (scenes, tasks, records, translation, TTS, etc.).</summary>
+        </member>
+        <member name="P:Shiliu.Oral.Sdk.ShiliuOralOptions.SoeBaseUrl">
+            <summary>Base URL for the Speech Oral Evaluation (SOE) API.</summary>
+        </member>
+        <member name="P:Shiliu.Oral.Sdk.ShiliuOralOptions.Source">
+            <summary>Source identifier sent in HTTP headers (default: "11806").</summary>
+        </member>
+        <member name="P:Shiliu.Oral.Sdk.ShiliuOralOptions.SoeAppKey">
+            <summary>SOE app key for HMAC authentication.</summary>
+        </member>
+        <member name="P:Shiliu.Oral.Sdk.ShiliuOralOptions.SoeAppSecret">
+            <summary>SOE app secret for HMAC authentication.</summary>
+        </member>
+        <member name="P:Shiliu.Oral.Sdk.ShiliuOralOptions.BaiduAppId">
+            <summary>Baidu ASR app ID.</summary>
+        </member>
+        <member name="P:Shiliu.Oral.Sdk.ShiliuOralOptions.BaiduAppKey">
+            <summary>Baidu ASR app key.</summary>
+        </member>
+        <member name="P:Shiliu.Oral.Sdk.ShiliuOralOptions.BaiduAsrWebSocketUri">
+            <summary>Baidu ASR WebSocket URI.</summary>
+        </member>
+        <member name="T:Shiliu.Oral.Sdk.ServiceCollectionExtensions">
+            <summary>
+            Extension methods for registering Shiliu Oral SDK services in the DI container.
+            </summary>
+        </member>
+        <member name="M:Shiliu.Oral.Sdk.ServiceCollectionExtensions.AddShiliuOralSdk(Microsoft.Extensions.DependencyInjection.IServiceCollection,Shiliu.Oral.Sdk.ShiliuOralOptions)">
+            <summary>
+            Registers all Shiliu Oral SDK services using the provided options.
+            Callers must also register an ITokenProvider implementation.
+            </summary>
+        </member>
+        <member name="M:Shiliu.Oral.Sdk.ServiceCollectionExtensions.AddShiliuOralSdk(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Shiliu.Oral.Sdk.ShiliuOralOptions})">
+            <summary>
+            Registers all Shiliu Oral SDK services with default options.
+            </summary>
+        </member>
+    </members>
+</doc>

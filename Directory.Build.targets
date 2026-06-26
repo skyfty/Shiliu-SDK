@@ -1,0 +1,30 @@
+<Project>
+  <PropertyGroup>
+    <SdkRootDir>$(MSBuildThisFileDirectory)</SdkRootDir>
+    <SdkLibDir>$(SdkRootDir)Lib\</SdkLibDir>
+  </PropertyGroup>
+
+  <Target Name="CopySdkOutputsToSdkLib"
+          AfterTargets="Build"
+          Condition="'$(IsCrossTargetingBuild)' != 'true'">
+    <MakeDir Directories="$(SdkLibDir)" />
+
+    <ItemGroup>
+      <_StaleSdkLibFiles Include="$(SdkLibDir)System.*.dll" />
+    </ItemGroup>
+
+    <Delete Files="@(_StaleSdkLibFiles)"
+            Condition="Exists('%(FullPath)')" />
+
+    <ItemGroup>
+    <_SdkOutputFiles Include="$(TargetPath)" Condition="Exists('$(TargetPath)')" />
+    <_SdkOutputFiles Include="$(TargetDir)$(TargetName).pdb" Condition="Exists('$(TargetDir)$(TargetName).pdb')" />
+    <_SdkOutputFiles Include="$(TargetDir)$(TargetName).xml" Condition="Exists('$(TargetDir)$(TargetName).xml')" />
+    <_SdkOutputFiles Include="$(TargetDir)$(TargetFileName).config" Condition="Exists('$(TargetDir)$(TargetFileName).config')" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(_SdkOutputFiles)"
+          DestinationFolder="$(SdkLibDir)"
+          SkipUnchangedFiles="true" />
+  </Target>
+</Project>
