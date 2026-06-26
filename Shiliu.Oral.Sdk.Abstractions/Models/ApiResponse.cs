@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace Shiliu.Oral.Sdk.Abstractions.Models
 {
     /// <summary>
@@ -7,16 +5,24 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
     /// </summary>
     public class ApiResponse<T>
     {
-        [JsonPropertyName("code")]
+        /// <summary>
+        /// Numeric status code returned by the API (server-defined).
+        /// </summary>
         public int Code { get; set; }
 
-        [JsonPropertyName("msg")]
+        /// <summary>
+        /// Human-readable message or error description.
+        /// </summary>
         public string Message { get; set; }
 
-        [JsonPropertyName("value")]
+        /// <summary>
+        /// Payload value returned by the API. The concrete type is T.
+        /// </summary>
         public T Value { get; set; }
 
-        [JsonPropertyName("success")]
+        /// <summary>
+        /// Indicates whether the request was successful.
+        /// </summary>
         public bool Success { get; set; }
     }
 
@@ -25,16 +31,24 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
     /// </summary>
     public class SoeApiResponse<T>
     {
-        [JsonPropertyName("code")]
+        /// <summary>
+        /// Numeric status code returned by SOE API.
+        /// </summary>
         public int Code { get; set; }
 
-        [JsonPropertyName("info")]
+        /// <summary>
+        /// Informational message or explanation from SOE API.
+        /// </summary>
         public string Info { get; set; }
 
-        [JsonPropertyName("data")]
+        /// <summary>
+        /// Response payload (data) returned by the SOE API.
+        /// </summary>
         public T Data { get; set; }
 
-        [JsonPropertyName("success")]
+        /// <summary>
+        /// Whether the SOE API reports success for the request.
+        /// </summary>
         public bool Success { get; set; }
     }
 
@@ -43,16 +57,24 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
     /// </summary>
     public class Page<T>
     {
-        [JsonPropertyName("totalCount")]
+        /// <summary>
+        /// Total number of items available across all pages.
+        /// </summary>
         public int TotalCount { get; set; }
 
-        [JsonPropertyName("currentPage")]
+        /// <summary>
+        /// Current page number (1-based).
+        /// </summary>
         public int CurrentPage { get; set; }
 
-        [JsonPropertyName("pageSize")]
+        /// <summary>
+        /// Size (number of items) per page.
+        /// </summary>
         public int PageSize { get; set; }
 
-        [JsonPropertyName("data")]
+        /// <summary>
+        /// Page data payload. The concrete shape is T (commonly a list).
+        /// </summary>
         public T Data { get; set; }
     }
 }

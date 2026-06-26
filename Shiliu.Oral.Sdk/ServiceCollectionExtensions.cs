@@ -36,7 +36,8 @@ namespace Shiliu.Oral.Sdk
                 client.Timeout = TimeSpan.FromSeconds(30);
             }).AddHttpMessageHandler(sp => new AuthHeaderHandler(
                 sp.GetRequiredService<ITokenProvider>(),
-                options.Source));
+                 options.Source,
+                 currentLanguageProvider: sp.GetService<ICurrentLanguageProvider>()));
 
             services.AddHttpClient("SoeClient", client =>
             {

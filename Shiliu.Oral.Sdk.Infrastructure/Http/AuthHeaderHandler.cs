@@ -1,6 +1,5 @@
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Shiliu.Oral.Sdk.Abstractions.Auth;
@@ -16,15 +15,21 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Http
         private readonly ITokenProvider _tokenProvider;
         private readonly string _source;
         private readonly Func<CancellationToken, Task<string>> _authHeaderFactory;
+        private readonly ICurrentLanguageProvider _currentLanguageProvider;
 
         /// <summary>
         /// Creates an AuthHeaderHandler with an optional custom auth header factory (for SOE HMAC).
         /// </summary>
-        public AuthHeaderHandler(ITokenProvider tokenProvider, string source = "11806", Func<CancellationToken, Task<string>> authHeaderFactory = null)
+        public AuthHeaderHandler(
+            ITokenProvider tokenProvider,
+            string source = "11806",
+            Func<CancellationToken, Task<string>> authHeaderFactory = null,
+            ICurrentLanguageProvider currentLanguageProvider = null)
         {
             _tokenProvider = tokenProvider ?? throw new ArgumentNullException(nameof(tokenProvider));
             _source = source;
             _authHeaderFactory = authHeaderFactory;
+            _currentLanguageProvider = currentLanguageProvider;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -39,6 +44,16 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Http
 
             request.Headers.Remove("source");
             request.Headers.Add("source", _source);
+
+            if (_currentLanguageProvider != null)
+            {
+                var language = await _currentLanguageProvider.GetCurrentLanguageAsync(cancellationToken);
+                request.Headers.Remove("language");
+                if (!string.IsNullOrWhiteSpace(language))
+                {
+                    request.Headers.Add("language", language);
+                }
+            }
 
             // Inject custom auth header (e.g. SOE HMAC)
             if (_authHeaderFactory != null)

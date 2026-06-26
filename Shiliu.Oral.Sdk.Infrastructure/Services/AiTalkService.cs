@@ -105,6 +105,14 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Services
             throw new ShiliuOralException($"获取音色列表失败: {result.Message}", category: ShiliuOralErrorCategory.ServerError);
         }
 
+        public async Task<List<SpeakLanguage>> GetLanguageListAsync(CancellationToken ct = default)
+        {
+            var content = await PostAsync("/api/speak/language/lang", "", ct);
+            var result = ParseResponse<List<SpeakLanguage>>(content);
+            if (result.Success) return result.Value ?? new List<SpeakLanguage>();
+            throw new ShiliuOralException($"获取语言列表失败: {result.Message}", category: ShiliuOralErrorCategory.ServerError);
+        }
+
         private static readonly JsonSerializerOptions _camelCaseOptions = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
