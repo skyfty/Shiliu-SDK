@@ -1,0 +1,27 @@
+<UserControl x:Class="Shiliu.DigitalHuman.Wpf.DigitalHumanView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:wfh="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+             xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms">
+    <Grid x:Name="RootGrid">
+        <!-- 渲染层：DXEngine 直接往这个 Panel 的 HWND 绘制 -->
+        <Border x:Name="RenderBorder">
+            <wfh:WindowsFormsHost x:Name="FormsHost">
+                <wf:Panel x:Name="RenderPanel" />
+            </wfh:WindowsFormsHost>
+        </Border>
+
+        <!-- Loading 层：初始化期间显示，初始化完成后隐藏 -->
+        <Grid x:Name="LoadingLayer" Visibility="Collapsed">
+            <TextBlock x:Name="LoadingTextBlock"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       Margin="0,150,0,0"
+                       FontSize="25"
+                       Foreground="White" />
+            <Image x:Name="LoadingImage"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left" />
+        </Grid>
+    </Grid>
+</UserControl>

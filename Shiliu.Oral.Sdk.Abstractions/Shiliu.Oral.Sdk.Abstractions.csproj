@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Shiliu.Oral.Sdk.Abstractions</RootNamespace>
+    <AssemblyName>Shiliu.Oral.Sdk.Abstractions</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Shiliu.Oral.Sdk.Abstractions.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Shiliu.Oral.Sdk.Abstractions.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Text.Json, Version=8.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Text.Json.8.0.5\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auth\ITokenProvider.cs" />
+    <Compile Include="Auth\TokenContext.cs" />
+    <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\SceneModels.cs" />
+    <Compile Include="Models\TaskModels.cs" />
+    <Compile Include="Models\UserModels.cs" />
+    <Compile Include="Models\SoeModels.cs" />
+    <Compile Include="Models\TranslationModels.cs" />
+    <Compile Include="Models\AudioModels.cs" />
+    <Compile Include="Models\UploadModels.cs" />
+    <Compile Include="Services\IShiliuOralClient.cs" />
+    <Compile Include="Services\IAiTalkService.cs" />
+    <Compile Include="Services\ISpeechEvaluationService.cs" />
+    <Compile Include="Services\ISpeechRecognizer.cs" />
+    <Compile Include="Services\ITranslationService.cs" />
+    <Compile Include="Services\IAudioCaptureService.cs" />
+    <Compile Include="Services\IAudioPlayerService.cs" />
+    <Compile Include="Events\AudioFrameEventArgs.cs" />
+    <Compile Include="Events\AsrEventArgs.cs" />
+    <Compile Include="Events\AiTalkErrorEventArgs.cs" />
+    <Compile Include="Enums\ShiliuOralErrorCategory.cs" />
+    <Compile Include="Enums\SoeMode.cs" />
+    <Compile Include="Enums\AudioFormat.cs" />
+    <Compile Include="Exceptions\ShiliuOralException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
