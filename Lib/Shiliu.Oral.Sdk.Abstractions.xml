@@ -227,6 +227,11 @@
             Available voice tone for TTS.
             </summary>
         </member>
+        <member name="T:Shiliu.Oral.Sdk.Abstractions.Models.VoiceToneDigitalPerson">
+            <summary>
+            Digital person configuration attached to a voice tone.
+            </summary>
+        </member>
         <member name="T:Shiliu.Oral.Sdk.Abstractions.Models.RecommendSpeakResult">
             <summary>
             Recommended speaking prompt for AI conversation.
@@ -346,6 +351,9 @@
         </member>
         <member name="M:Shiliu.Oral.Sdk.Abstractions.Services.IAiTalkService.GetVoiceTonesAsync(System.Threading.CancellationToken)">
             <summary>Get available voice tone list.</summary>
+        </member>
+        <member name="M:Shiliu.Oral.Sdk.Abstractions.Services.IAiTalkService.GetVoiceTonesListByLangAsync(System.String,System.Threading.CancellationToken)">
+            <summary>Get available voice tone list by selected language.</summary>
         </member>
         <member name="M:Shiliu.Oral.Sdk.Abstractions.Services.IAiTalkService.GetLanguageListAsync(System.Threading.CancellationToken)">
             <summary>Get available spoken-language list.</summary>

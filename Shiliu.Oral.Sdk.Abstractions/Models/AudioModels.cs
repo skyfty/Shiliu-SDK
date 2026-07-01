@@ -25,6 +25,29 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
         public string LanguageType { get; set; }
         public string Gender { get; set; }
         public int IsDefault { get; set; }
+        public List<VoiceToneDigitalPerson> DigitalPersons { get; set; }
+        public List<int> ScenesEvaluationType { get; set; }
+        public int VoiceType { get; set; }
+    }
+
+    /// <summary>
+    /// Digital person configuration attached to a voice tone.
+    /// </summary>
+    public class VoiceToneDigitalPerson
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public string Md5 { get; set; }
+        public string Img { get; set; }
+        public string Description { get; set; }
+        public bool Gender { get; set; }
+        public string AgeRange { get; set; }
+        public string Style { get; set; }
+        public bool IsDefault { get; set; }
+        public string LargeAvatarUrl { get; set; }
+        public string SmallAvatarUrl { get; set; }
+        public string AvatarVideoUrl { get; set; }
     }
 
     /// <summary>

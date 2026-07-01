@@ -106,6 +106,14 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Services
             throw new ShiliuOralException($"获取音色列表失败: {result.Message}", category: ShiliuOralErrorCategory.ServerError);
         }
 
+        public async Task<List<VoiceTone>> GetVoiceTonesListByLangAsync(string language, CancellationToken ct = default)
+        {
+            var content = await PostAsync("/api/speak/voiceTone/listByLang", JsonSerializer.Serialize(new { language }), ct);
+            var result = ParseResponse<List<VoiceTone>>(content);
+            if (result.Success) return result.Value ?? new List<VoiceTone>();
+            throw new ShiliuOralException($"按语言获取音色列表失败: {result.Message}", category: ShiliuOralErrorCategory.ServerError);
+        }
+
         public async Task<List<SpeakLanguage>> GetLanguageListAsync(CancellationToken ct = default)
         {
             var content = await PostAsync("/api/speak/language/lang", "", ct);

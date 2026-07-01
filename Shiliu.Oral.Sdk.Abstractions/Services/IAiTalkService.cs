@@ -41,6 +41,9 @@ namespace Shiliu.Oral.Sdk.Abstractions.Services
         /// <summary>Get available voice tone list.</summary>
         Task<List<VoiceTone>> GetVoiceTonesAsync(CancellationToken ct = default);
 
+        /// <summary>Get available voice tone list by selected language.</summary>
+        Task<List<VoiceTone>> GetVoiceTonesListByLangAsync(string language, CancellationToken ct = default);
+
         /// <summary>Get available spoken-language list.</summary>
         Task<List<SpeakLanguage>> GetLanguageListAsync(CancellationToken ct = default);
 
