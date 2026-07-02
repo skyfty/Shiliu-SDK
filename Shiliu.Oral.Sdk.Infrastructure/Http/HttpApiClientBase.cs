@@ -66,15 +66,6 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Http
         {
             var request = new HttpRequestMessage(method, url);
 
-            if (CurrentLanguageProvider != null)
-            {
-                var language = await CurrentLanguageProvider.GetCurrentLanguageAsync(ct);
-                if (!string.IsNullOrWhiteSpace(language))
-                {
-                    request.Headers.TryAddWithoutValidation("language", language);
-                }
-            }
-
             return request;
         }
 

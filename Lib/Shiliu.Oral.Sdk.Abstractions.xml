@@ -48,74 +48,14 @@
             Unified API response wrapper matching AiTalk API format.
             </summary>
         </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.ApiResponse`1.Code">
-            <summary>
-            Numeric status code returned by the API (server-defined).
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.ApiResponse`1.Message">
-            <summary>
-            Human-readable message or error description.
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.ApiResponse`1.Value">
-            <summary>
-            Payload value returned by the API. The concrete type is T.
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.ApiResponse`1.Success">
-            <summary>
-            Indicates whether the request was successful.
-            </summary>
-        </member>
         <member name="T:Shiliu.Oral.Sdk.Abstractions.Models.SoeApiResponse`1">
             <summary>
             API response wrapper matching SOE API format.
             </summary>
         </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.SoeApiResponse`1.Code">
-            <summary>
-            Numeric status code returned by SOE API.
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.SoeApiResponse`1.Info">
-            <summary>
-            Informational message or explanation from SOE API.
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.SoeApiResponse`1.Data">
-            <summary>
-            Response payload (data) returned by the SOE API.
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.SoeApiResponse`1.Success">
-            <summary>
-            Whether the SOE API reports success for the request.
-            </summary>
-        </member>
         <member name="T:Shiliu.Oral.Sdk.Abstractions.Models.Page`1">
             <summary>
             Paginated response wrapper.
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.Page`1.TotalCount">
-            <summary>
-            Total number of items available across all pages.
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.Page`1.CurrentPage">
-            <summary>
-            Current page number (1-based).
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.Page`1.PageSize">
-            <summary>
-            Size (number of items) per page.
-            </summary>
-        </member>
-        <member name="P:Shiliu.Oral.Sdk.Abstractions.Models.Page`1.Data">
-            <summary>
-            Page data payload. The concrete shape is T (commonly a list).
             </summary>
         </member>
         <member name="T:Shiliu.Oral.Sdk.Abstractions.Models.SpeakLanguage">

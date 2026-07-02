@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Shiliu.Oral.Sdk.Abstractions.Models
 {
@@ -86,12 +87,16 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
     {
         public string CorrectId { get; set; }
 
+        [JsonPropertyName("overall")]
         public double OverallScore { get; set; }
 
+        [JsonPropertyName("pronunciation")]
         public double PronScore { get; set; }
 
+        [JsonPropertyName("fluency")]
         public double FluencyScore { get; set; }
 
+        [JsonPropertyName("integrity")]
         public double IntegrityScore { get; set; }
 
         public WordScore[] Words { get; set; }

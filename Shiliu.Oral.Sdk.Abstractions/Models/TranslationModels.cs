@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Shiliu.Oral.Sdk.Abstractions.Models
 {
@@ -7,20 +8,28 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
     /// </summary>
     public class TranslateLanguage
     {
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
+        [JsonPropertyName("languageCode")]
         public string Code { get; set; }
 
+        [JsonPropertyName("languageName")]
         public string Name { get; set; }
 
+        [JsonPropertyName("englishName")]
         public string EnglishName { get; set; }
 
+        [JsonPropertyName("languageCodeBd")]
         public string CodeBd { get; set; }
 
+        [JsonPropertyName("languageCodeAzure")]
         public string CodeAzure { get; set; }
 
+        [JsonPropertyName("sort")]
         public int Sort { get; set; }
 
+        [JsonPropertyName("isDeleted")]
         public int IsDeleted { get; set; }
     }
 
@@ -30,22 +39,31 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
     /// </summary>
     public class SiRecord
     {
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
+        [JsonPropertyName("userId")]
         public string UserId { get; set; }
 
+        [JsonPropertyName("originalLanguage")]
         public string OriginalLanguage { get; set; }
 
+        [JsonPropertyName("translatedLanguage")]
         public string TranslatedLanguage { get; set; }
 
+        [JsonPropertyName("audioUrl")]
         public string AudioUrl { get; set; }
 
+        [JsonPropertyName("audioDuration")]
         public int? AudioDuration { get; set; }
 
+        [JsonPropertyName("status")]
         public int Status { get; set; }
 
+        [JsonPropertyName("created")]
         public string Created { get; set; }
 
+        [JsonPropertyName("originalText")]
         public string OriginalText { get; set; }
     }
 
@@ -95,16 +113,22 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
     /// </summary>
     public class TextTranslationResult
     {
+        [JsonPropertyName("translatedText")]
         public string TranslatedText { get; set; }
 
+        [JsonPropertyName("originalText")]
         public string OriginalText { get; set; }
 
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
+        [JsonPropertyName("created")]
         public string Created { get; set; }
 
+        [JsonPropertyName("originalLanguage")]
         public string OriginalLanguage { get; set; }
 
+        [JsonPropertyName("translatedLanguage")]
         public string TranslatedLanguage { get; set; }
     }
 
@@ -124,26 +148,37 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
     /// </summary>
     public class TextTranslationRecord
     {
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
+        [JsonPropertyName("userId")]
         public string UserId { get; set; }
 
+        [JsonPropertyName("originalText")]
         public string OriginalText { get; set; }
 
+        [JsonPropertyName("originalLanguage")]
         public string OriginalLanguage { get; set; }
 
+        [JsonPropertyName("originalLanguageName")]
         public string OriginalLanguageName { get; set; }
 
+        [JsonPropertyName("translatedText")]
         public string TranslatedText { get; set; }
 
+        [JsonPropertyName("translatedLanguage")]
         public string TranslatedLanguage { get; set; }
 
+        [JsonPropertyName("translatedLanguageName")]
         public string TranslatedLanguageName { get; set; }
 
+        [JsonPropertyName("characterCount")]
         public int CharacterCount { get; set; }
 
+        [JsonPropertyName("created")]
         public string Created { get; set; }
 
+        [JsonPropertyName("isDeleted")]
         public string IsDeleted { get; set; }
     }
 }
