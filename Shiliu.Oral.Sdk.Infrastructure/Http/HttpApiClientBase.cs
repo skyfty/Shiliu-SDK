@@ -65,7 +65,7 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Http
         private async Task<HttpRequestMessage> CreateRequestMessageAsync(HttpMethod method, string url, CancellationToken ct)
         {
             var request = new HttpRequestMessage(method, url);
-
+            request.Headers.Add("u-os", "1");
             return request;
         }
 
