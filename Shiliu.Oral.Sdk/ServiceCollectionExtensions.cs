@@ -51,6 +51,7 @@ namespace Shiliu.Oral.Sdk
             services.AddSingleton<ISpeechEvaluationService>(sp => new SpeechEvaluationService(
                 sp.GetRequiredService<IHttpClientFactory>(),
                 sp.GetRequiredService<ILogger<SpeechEvaluationService>>(),
+                sp.GetRequiredService<ICurrentLanguageProvider>(),
                 options.SoeAppKey,
                 options.SoeAppSecret));
 
