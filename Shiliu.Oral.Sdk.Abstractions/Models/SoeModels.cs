@@ -52,6 +52,7 @@ namespace Shiliu.Oral.Sdk.Abstractions.Models
         public int SceneId { get; set; }
         public string QuesId { get; set; }
         public int QuesType { get; set; }
+        public int Lang { get; set; }
     }
 
     /// <summary>

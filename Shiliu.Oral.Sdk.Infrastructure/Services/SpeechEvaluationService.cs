@@ -24,15 +24,6 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Services
         private readonly string _appKey;
         private readonly string _appSecret;
 
-        private const int LangEn = 1;
-        private const int LangJa = 2;
-        private const int LangFr = 3;
-        private const int LangRu = 4;
-        private const int LangKr = 5;
-        private const int LangDe = 6;
-        private const int LangEs = 7;
-        private const int LangCn = 9;
-
         public SpeechEvaluationService(
             IHttpClientFactory httpClientFactory,
             ILogger<SpeechEvaluationService> logger,
@@ -69,7 +60,6 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Services
         public async Task<EvaluationResult> SubmitEvaluationAsync(SubmitEvaluationRequest request, CancellationToken ct = default)
         {
             var auth = await GenerateAuthHeaderAsync(ct);
-            var language = await GetCurrentLanguageHeaderValueAsync(ct);
             var client = HttpClientFactory.CreateClient(ClientName);
             var url = new Uri(client.BaseAddress, "/soe/api/correct").ToString();
 
@@ -80,10 +70,7 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Services
             var httpContent = new System.Net.Http.StringContent(requestBody, System.Text.Encoding.UTF8, "application/json");
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, url) { Content = httpContent };
             httpRequest.Headers.Add("auth", auth);
-            if (!string.IsNullOrWhiteSpace(language))
-            {
-                httpRequest.Headers.Add("lang", language);
-            }
+            httpRequest.Headers.Add("lang", request.Lang.ToString());
             var response = await client.SendAsync(httpRequest, ct);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
@@ -118,17 +105,13 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Services
         public async Task<EvaluationResult> QueryEvaluationResultAsync(string correctId, CancellationToken ct = default)
         {
             var auth = await GenerateAuthHeaderAsync(ct);
-            var language = await GetCurrentLanguageHeaderValueAsync(ct);
             var client = HttpClientFactory.CreateClient(ClientName);
             var url = new Uri(client.BaseAddress, $"/soe/api/result/{correctId}").ToString();
 
             Logger?.LogDebug("GET {Url}", url);
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, url);
             httpRequest.Headers.Add("auth", auth);
-            if (!string.IsNullOrWhiteSpace(language))
-            {
-                httpRequest.Headers.Add("lang", language);
-            }
+  
             var response = await client.SendAsync(httpRequest, ct);
             response.EnsureSuccessStatusCode();
             var responseContent = await response.Content.ReadAsStringAsync();
@@ -202,67 +185,7 @@ namespace Shiliu.Oral.Sdk.Infrastructure.Services
                 return sb.ToString();
             }
         }
-        
-        private async Task<string> GetCurrentLanguageHeaderValueAsync(CancellationToken ct = default)
-        {
-            if (CurrentLanguageProvider == null)
-            {
-                return null;
-            }
-            var language = await CurrentLanguageProvider.GetCurrentLanguageAsync(ct);
-            return ConvertSoeLanguage(language).ToString();
-        }
-
-        private static int ConvertSoeLanguage(string languageType)
-        {
-            if (string.IsNullOrWhiteSpace(languageType))
-            {
-                return LangEn;
-            }
-
-            var language = languageType.Trim().ToLowerInvariant();
-            if (language == "en" || language.StartsWith("en-"))
-            {
-                return LangEn;
-            }
-
-            if (language == "ja" || language.StartsWith("ja-"))
-            {
-                return LangJa;
-            }
-
-            if (language == "fra" || language.StartsWith("fra") || language.StartsWith("fr-"))
-            {
-                return LangFr;
-            }
-
-            if (language == "ru" || language.StartsWith("ru-"))
-            {
-                return LangRu;
-            }
-
-            if (language == "kor" || language.StartsWith("ko-") || language.StartsWith("kr-"))
-            {
-                return LangKr;
-            }
-
-            if (language == "de" || language.StartsWith("de-"))
-            {
-                return LangDe;
-            }
-
-            if (language == "spa" || language.StartsWith("es-") || language.StartsWith("spa"))
-            {
-                return LangEs;
-            }
-
-            if (language == "zh" || language == "cn" || language.StartsWith("zh-") || language.StartsWith("cn-") || language.Contains("local_speak_language_zh"))
-            {
-                return LangCn;
-            }
-
-            return LangEn;
-        }
+       
 
         private class QueryResultRaw
         {
